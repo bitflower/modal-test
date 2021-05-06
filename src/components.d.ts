@@ -6,6 +6,8 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface AppConfirm {
+    }
     interface AppHome {
     }
     interface AppProfile {
@@ -15,6 +17,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLAppConfirmElement extends Components.AppConfirm, HTMLStencilElement {
+    }
+    var HTMLAppConfirmElement: {
+        prototype: HTMLAppConfirmElement;
+        new (): HTMLAppConfirmElement;
+    };
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
     }
     var HTMLAppHomeElement: {
@@ -34,12 +42,15 @@ declare global {
         new (): HTMLAppRootElement;
     };
     interface HTMLElementTagNameMap {
+        "app-confirm": HTMLAppConfirmElement;
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
     }
 }
 declare namespace LocalJSX {
+    interface AppConfirm {
+    }
     interface AppHome {
     }
     interface AppProfile {
@@ -48,6 +59,7 @@ declare namespace LocalJSX {
     interface AppRoot {
     }
     interface IntrinsicElements {
+        "app-confirm": AppConfirm;
         "app-home": AppHome;
         "app-profile": AppProfile;
         "app-root": AppRoot;
@@ -57,6 +69,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-confirm": LocalJSX.AppConfirm & JSXBase.HTMLAttributes<HTMLAppConfirmElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;

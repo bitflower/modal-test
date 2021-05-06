@@ -1,4 +1,6 @@
+import { modalController } from '@ionic/core';
 import { Component, Prop, State, h } from '@stencil/core';
+
 import { sayHello } from '../../helpers/utils';
 
 @Component({
@@ -16,13 +18,24 @@ export class AppProfile {
     return '';
   }
 
+  private showModal = async () => {
+    const modal = await modalController.create({
+      component: 'app-confirm',
+      cssClass: 'small-modal',
+    });
+    await modal.present();
+  };
+
+  // --------------------------------------------------------------------------
+  //
+  //  Render
+  //
+  // --------------------------------------------------------------------------
+
   render() {
     return [
       <ion-header>
         <ion-toolbar color="primary">
-          <ion-buttons slot="start">
-            <ion-back-button defaultHref="/" />
-          </ion-buttons>
           <ion-title>Profile: {this.name}</ion-title>
         </ion-toolbar>
       </ion-header>,
@@ -36,6 +49,10 @@ export class AppProfile {
           <ion-label>Setting ({this.state.toString()})</ion-label>
           <ion-toggle checked={this.state} onIonChange={ev => (this.state = ev.detail.checked)} />
         </ion-item>
+
+        <ion-button expand="block" color="danger" onClick={this.showModal}>
+          Delete
+        </ion-button>
       </ion-content>,
     ];
   }

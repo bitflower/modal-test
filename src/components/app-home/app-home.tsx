@@ -1,3 +1,4 @@
+import { modalController } from '@ionic/core';
 import { Component, h } from '@stencil/core';
 
 @Component({
@@ -5,6 +6,22 @@ import { Component, h } from '@stencil/core';
   styleUrl: 'app-home.css',
 })
 export class AppHome {
+  private showModal = async () => {
+    const modal = await modalController.create({
+      component: 'app-profile',
+      componentProps: {
+        name: 'Danny',
+      },
+    });
+    await modal.present();
+  };
+
+  // --------------------------------------------------------------------------
+  //
+  //  Render
+  //
+  // --------------------------------------------------------------------------
+
   render() {
     return [
       <ion-header>
@@ -19,8 +36,8 @@ export class AppHome {
           in this starter out of the box and check out our docs on <a href="https://stenciljs.com">stenciljs.com</a> to get started.
         </p>
 
-        <ion-button href="/profile/ionic" expand="block">
-          Profile page
+        <ion-button expand="block" onClick={this.showModal}>
+          Open Profile in modal
         </ion-button>
       </ion-content>,
     ];
